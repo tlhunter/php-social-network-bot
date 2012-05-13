@@ -15,6 +15,8 @@ script keeps doing its thing, and the status script doesn't interfere.
 I will be removing the various URLs and other items which can identify the social network this was built
 for. Feel free to fork this code and do whatever you want with it.
 
+![Social Network Bot Screenshot](https://github.com/tlhunter/php-social-network-bot/raw/master/screenshot.png)
+
 Instructions (original readme)
 ==
 
