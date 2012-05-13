@@ -1,0 +1,120 @@
+body {
+	background-color: #211a10;
+	color: white;
+	font-family: calibri, arial;
+	font-size: 14px;
+	text-align: center;
+}
+#container {
+	margin: 0 auto 50px auto;
+	background: transparent url("../images/body.png") no-repeat;
+	width: 800px;
+	height: 500px;
+	color: black;
+	text-align: left;
+	overflow: hidden;
+}
+#content {
+	padding: 20px;
+}
+#prgProgress {
+	font-size: 12px;
+	height: 24px;
+	float: right;
+	width: 690px;
+}
+ul#icons {
+	margin: 0;
+	padding: 0;
+	width: 64px;
+	height: 36px;
+	float: left;
+}
+ul#icons li {
+	margin: 0 4px 0 0;
+	position: relative;
+	padding: 4px 0;
+	cursor: pointer;
+	float: left;
+	list-style: none;
+}
+ul#icons span.ui-icon {
+	float: left;
+	margin: 0 4px;
+}
+.txtResults {
+	background-color: #0b0a08;
+	-moz-border-radius: 8px;
+	height: 424px;
+	float: left;
+	color: #64f955;
+	overflow: auto;
+}
+.txtContent {
+	padding: 10px;
+}
+.txtOutputResults {
+	width: 500px;
+	margin-right: 10px;
+}
+.txtUserResults {
+	width: 250px;
+}
+#logo {
+	width: 760px;
+	height: 40px;
+	color: #64f955;
+	margin: 0 auto;
+	font-size: 20px;
+	text-align: left;
+	padding-top: 30px;
+}
+#txtOutputResultsContent .unit {
+	margin-bottom: 10px;
+	background-color: black;
+	-moz-border-radius: 4px;
+	border: 1px solid #333;
+	padding: 5px;
+}
+.txtUserResults .subunit {
+	margin-bottom: 3px;
+	background-color: #333;
+	-moz-border-radius: 2px;
+	border: 1px solid #333;
+	padding: 1px;
+	font-size: 11px;
+	font-family: verdana;
+	color: white;
+}
+#txtOutputResultsContent .unit b {
+	color: white;
+}
+.txtOutputResults #txtOutputResultsContent .error {
+	border-color: #ae0000;
+	color: #666;
+	background-color: #0a0000;
+}
+p {
+	padding-bottom: 10px;
+	line-height: 20px;
+}
+a {
+	color: white;
+	text-decoration: none;
+}
+.counter {
+	font-family: consolas;
+	border-right: 1px solid #333;
+	padding-right: 4px;
+	font-size: 12px;
+}
+.error .counter {
+	border-color: #ae0000;
+}
+#navigation td {
+	padding: 2px 3px 2px 0;
+}
+strong {
+	font-weight: bold;
+	color: white;
+}

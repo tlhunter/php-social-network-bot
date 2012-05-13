@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Social Network Bot</title>
+		<link type="text/css" href="css/mint-choc/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+		<link type="text/css" href="css/reset.css" rel="stylesheet" />	
+		<link type="text/css" href="css/style.css" rel="stylesheet" />
+		<link type="text/css" href="css/facebox.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+		<script type="text/javascript" src="js/facebox.js"></script>
+		<script type="text/javascript">
+			var refreshId;
+			var totalUsers = 1;
+			var currentUser = 0;
+			$(function(){
+				$("#prgProgress").progressbar({
+					value: 0.5
+				});
+				$("#btnClear").click(function() {
+					$(".level0").hide("slow");
+
+				});
+				var executionStarted = false;
+				$("#btnPlay").click(function() {
+					if (!executionStarted) {
+						executionStarted = true;
+						$.ajax({
+							type: "GET",
+							url: "bot.php"
+						});
+						grabContents(true);
+						refreshId = setInterval(function() {
+							grabContents(false);
+						}, 3000);
+					}
+				});
+				$("#btnStop").click(function() {
+					//stopUpdates();
+					$.ajax({
+						type: "GET",
+						url: "stop.php"
+					});
+				});
+				$('a[rel*=facebox]').facebox()
+			});
+			function stopUpdates() {
+				clearInterval(refreshId);
+				executionStarted = false;
+			}
+			function grabContents(firstTime) {
+				if (firstTime) {
+					myUrl = "progress.php?first";
+				} else {
+					myUrl = "progress.php"
+				}
+				$.ajax({
+					url: myUrl,
+					cache: false,
+					success: function(html) {
+						if (html == '') {
+							//stopUpdates();
+						} else {
+							$("#txtOutputResultsContent").append(html);
+							$("#prgProgress").progressbar('option', 'value', (currentUser / totalUsers) * 100);
+						}
+						
+					}
+				});
+				$.ajax({
+					url: "progress_peruser.php",
+					cache: false,
+					success: function(html) {
+						if (html == '') {
+							//stopUpdates();
+						} else {
+							$("#txtUserResultsContent").append(html);
+						}
+
+					}
+				});
+			}
+		</script>
+
+	</head>
+	<body>
+		<h1 id="logo">Social Network Bot</h1>
+		<div id="container">
+			<div id="content">
+				<ul id="icons" class="ui-widget ui-helper-clearfix">
+					<li id="btnPlay" class="ui-state-default ui-corner-all" title="Start Bot"><span class="ui-icon ui-icon-play"></span></li>
+					<li id="btnStop" class="ui-state-default ui-corner-all" title="Stop Bot"><span class="ui-icon ui-icon-stop"></span></li>
+				</ul>
+				<div id="prgProgress"></div>
+				<div style="clear: both;"></div>
+				<div class="txtOutputResults txtResults">
+					<div id="txtOutputResultsContent" class="txtContent"></div>
+				</div>
+				<div class="txtUserResults txtResults">
+					<div id="txtUserResultsContent" class="txtContent">
+						<p><strong>Social Network Bot</strong></p>
+						<p>Press the play button at the top of the screen to iterate through your database of users and send your personalized messages to each friend.</p>
+						<table id="navigation">
+							<tr><td><a href="reset.php" rel="facebox">Reset Users</a></td><td>Resets progress</td></tr>
+							<tr><td><a href="import.php" rel="facebox">Add Users</a></td><td>Import more users</td></tr>
+							<tr><td><a href="settings.php" rel="facebox">Messages</a></td><td>Modify settings database</td></tr>
+							<tr><td><a href="download.php" target="_blank">Download</a></td><td>Download Useful Users</td></tr>
+							<tr><td><a href="deleteall.php" rel="facebox">DELETE ALL</a></td><td>Delete All Users</td></tr>
+							<tr><td><a id="btnClear" href="javascript:;">Clear</a></td><td>Clears Boring Messages</td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
